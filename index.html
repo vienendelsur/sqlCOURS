@@ -85,9 +85,9 @@
 
   <div class="container">
     <!-- Example row of columns -->
-    <div class="row">
+    <div class="row mt-4 mb-4">
       <div class="col-md-4">
-        <h2>MySQL</h2>
+        <h5 class="bg-primary w-50">MySQL</h5>
         <ul>
             <li>MySQL peut s'utiliser en ligne de commande (Bash ou CMDR) ou avec une interface graphique (php MyAdmin)</li>
             <li>Pour se connecter à MySQL en ligne de commande on utilise <code>mysql -u utilisateur -p</code></li>
@@ -95,7 +95,7 @@
         <p><a class="btn btn-warning" href="https://openclassrooms.com/fr/courses/1959476-administrez-vos-bases-de-donnees-avec-mysql/1959969-installez-mysql" role="button" target="_blank">+ sur la ligne de cmd</a></p>
       </div>
       <div class="col-md-4">
-        <h2>En résumé</h2>
+        <h5 class="bg-primary w-50">En résumé</h5>
         <ul>
             <li>MySQL est un <abbr>SGBDR</abbr> <strong>Système de Gestion de Base de Données Relationnelles</strong></li>
             <li>Le langage SQL est utilisé pour la communication entre le client et le serveur</li>
@@ -105,7 +105,7 @@
         <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
       </div>
       <div class="col-md-4">
-        <h2>SGBDR / SGBD</h2>
+        <h5 class="bg-primary w-50">SGBDR / SGBD</h5>
        <ul>
            <li>Un système qui permet de gérer une BDD /// CRUD create, read, update, delete</li>
            <li>Le logiciel client permet de dialoguer avec le serveur avec le langage SQL</li>
@@ -119,9 +119,9 @@
     </div>
 
     <hr>
-    <div class="row">
+    <div class="row mt-4 mb-4">
         <div class="col-md-12 bg-light">
-            <h2>Requêtes de base, création exemples</h2>
+            <h5 class="bg-primary w-50">Requêtes de base, création exemples</h5>
             <ul>
                 <li>Créer une BDD : <code>CREATE DATABASE basetest CHARACTER SET 'utf8';</code></li>
                 <li>Supprimer une BDD : <code>DROP DATABASE IF EXISTS basetest</code></li>
@@ -138,18 +138,168 @@
                 )</code></li>
                 <li>Insérer dans une table : <code>INSERT INTO t_utilisateurs (id, nom, prenom, email, date_naissance, pays, ville, code_postal, nombre_achat) VALUES (NULL, 'Sand', 'Georges', 'georges.sand@france.fr', '1802-02-26', 'France', 'Bourges', '18000', NULL);</code></li>
                 <li>Afficher le contenu d'une table <code>SELECT * FROM t_utilisateurs</code></li>
-                <li>Afficher et trier <code>SELECT * FROM t_utilisateurs ORDER BY nom ASC</code></li>
-                <li>Effacer un enregistrement : <code>DELETE FROM t_utilisateurs WHERE nom='Chirac'</code></li>
-            </ul>
+				<li>Effacer un enregistrement : <code>DELETE FROM t_utilisateurs WHERE nom='Chirac'</code></li>
+				<li>Observer la structure d'une table <code>DESC t_utilisateurs</code></li>
+			</ul>
+			<p><a class="btn btn-secondary" href="#suite" role="button">Autres requêtes</a></p>
         </div>
     </div><!-- /row -->
+
+    <div class="row mt-4 mb-4">
+      <div class="col-md-12">
+        <h5 class="bg-primary w-50">Les types de données</h5>
+
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Type de champ</th>
+              <th scope="col">Description</th>
+              <th scope="col">Contexte</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">VARCHAR</th>
+              <td>Chaîne (jusqu'à 256 caractères)</td>
+              <td>Pour enregistrer un pseudo, un email, le titre d'un produit ou d'un article de blog</td>
+            </tr>
+            <tr>
+              <th scope="row">TEXT</th>
+              <td>Chaîne de caractère (illimité)</td>
+              <td>Pour un contenu textuel long, un article de blog</td>
+            </tr>
+            <tr>
+              <th scope="row">INT</th>
+              <td>Numérique</td>
+              <td>Pour un identifiant, un prix, un code un code postal le nombre de produits en stocks etc.</td>
+            </tr>
+            <tr>
+              <th scope="row">DATE</th>
+              <td>Date</td>
+              <td>Pour la date d'un enregistrement (une inscription), la date d'une commande etc.</td>
+            </tr>
+            <tr>
+              <th scope="row">ENUM</th>
+              <td>Une liste (une énumération)</td>
+              <td>Pour proposer une liste de termes ex. : "Madame", "Monsieur"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /row -->
+    
+    <div class="row mt-4 mb-4">
+      <div class="col-md-6 bg-light">
+        <h5 class="bg-primary w-50">Les identifiants (clé primaire - PK primary key)</h5>
+          <p>Les identifiants sont des champs (colonnes) un peu particuliers car ils ne décrivent pas le sujet (ce n'est pas une des caractéristiques du sujet) mais ce  sont des colonnes (champs) systématiquement présent dans chaque table et ce en première position.</p>
+         <p>
+            Chaque table possède une colonne (champ) identifiant. Nous appellerons cela une clé primaire (PK).
+            Par exemple, nous pourrons l'appeler "id" (ou encore "idProduit" ou "id_produit") pour la table produit, et "idMembre" pour la table membre.
+         </p>
+          <p>
+            Il s'agit d'une liste numérotée permettant de différencier chaque enregistrement de manière unique.
+            Le produit "tshirt rouge" deviendra (par exemple) le produit n°396 "tshirt rouge".
+            Pour éviter de choisir le numéro et faire des erreurs nous demanderons à le générer automatiquement avec l'Auto_Increment.
+          </p>
+      </div>
+      <div class="col-md-6">
+        <h5 class="bg-primary w-50">Auto_Increment</h5>
+        <p> Auto_Increment est une option permettant de générer un numéro unique dans une colonne (champ) de type clé primaire (identifiant).</p>
+        <p>Par conséquent, retenez bien que le 1er champ de chaque table sera systématiquement un "id" qui sera PK (Primary Key) et AI (Auto_Increment).</p>
+      </div>
+    </div><!-- /row -->
+
+    <!-- div.row>div.col-md-6*2 -->
+    <div class="row mt-4 mb-4">
+      <div class="col-md-6">
+        <h5 class="bg-primary w-50">NULL / NOT NULL</h5>
+        <p>Dans chaque champ, nous pourrons indiquer si nous acceptons les valeurs NULL ou non (NOT NULL)</p>
+        <p> NULL est un type de valeur en informatique évitant de laisser un champ vide si nous n'avons pas d'informations à y déposer</p>
+      </div>
+      <div class="col-md-6 bg-light">
+		<h5 class="bg-primary w-50">Les relations</h5>
+		<p>Il arrive parfois que les sujets interagissent entre eux</p>
+		<p>Exemple : 1 membre commande 1 produit (ou 1 produit est commandé par 1 membre), nous devrons enregistrer l'information dans 1 table commande.</p>
+		<p>Autre exemple : 1 conducteur conduit 1 véhicule (ou 1 véhicule est conduit par 1 conducteur). il nous faudra une table permettant de préciser quel conducteur va avec quel véhicule.</p>
+      </div>
+	</div><!-- /row -->
+	
+	<div class="row mt-4 mb-4">
+		<div class="col-md-6 bg-light">
+			<h5 class="bg-primary w-50">Les cardinalités</h5>
+			<p>Exemple : 1 livre possède forcément 1 auteur et qu'1 seul. Relation (1,1). Minimum 1 auteur, Maximum 1 auteur.</p>
+			<p>1 auteur peut avoir écrit plusieurs livre (ou aucun). Relation (0,n). Minimum 0 livre, Maximum N livres</p>
+			<p>Dans cet exemple une table auteurs et une table livres suffisent : nous n'avons pas besoin de table de jointure</p>
+		</div>
+		<div class="col-md-6">
+
+		</div>
+	</div><!-- /row -->
+
+	<div class="row mt-4 mb-4" id="suite">
+		<div class="col-md-12 bg-light">
+			<h5 class="bg-primary w-50">Les requêtes (suite)</h5>
+			<ul>
+				<li>Afficher et trier : ORDER BY <code>SELECT * FROM employes ORDER BY nom ASC</code></li>
+				<li>Tri multiple : <code>SELECT service, nom, prenom FROM employes ORDER BY service ASC, nom ASC</code></li>
+				<li>Une condition : WHERE (à condition que) <code>SELECT nom, prenom FROM employes WHERE service='informatique'</code></li>
+				<li>---</li>
+				<li>Le mot clef : BETWEEN (entre) <code>SELECT nom, prenom, date_embauche FROM employes WHERE date_embauche BETWEEN '2006-01-01' AND '2010-12-31'</code></li>
+				<li>Une fonction prédéfinies avec ses parenthèses : CURDATE() (date courante) <code>SELECT nom, prenom, date_embauche FROM employes WHERE date_embauche BETWEEN '2006-01-01' AND CURDATE()</code></li>
+				<li>Le mot clef : LIKE <code>SELECT prenom FROM employes WHERE prenom LIKE '%s'</code> ou <code>SELECT prenom FROM employes WHERE prenom LIKE '%-%'</code></li>
+				<li>= "est égal"</li>
+				<li>> "strictement supérieur, >= "supérieur ou égal"</li>
+				<li>< "strictement inférieur, <= "inférieur ou égal"</li>
+				<li><> ou != "est différent" <code>SELECT nom, prenom, service FROM employes WHERE service !='informatique'</code></li>
+				<li class="bg-secondary w-25">Limiter</li>
+				<li>Limiter les résultats : LIMIT <code>SELECT nom, prenom, service, salaire FROM employes ORDER BY salaire DESC LIMIT 0,3</code> <span class="small">(le 1er chiffre précise l'enregistrement de départ, le 2nd chiffre indique le nbr de résultats)</span></li>
+				<li class="bg-secondary w-25">Calculer</li>
+				<li>Faire des calculs : <code>SELECT nom, prenom, salaire*12 FROM employes</code></li>
+				<li>Le mot clef AS permet de définir un ALIAS : <code>SELECT nom, prenom, salaire*12 AS salaire_annuel FROM employes</code></li>
+				<li>Somme d'une colonne avec SUM() :  <code>SELECT SUM(salaire*12) FROM employes</code></li>
+				<li>Calculer une moyenne avec AVG() : <code>SELECT AVG(salaire) FROM employes</code></li>
+				<li>Arrondir un résultat avec ROUND() : <code>SELECT ROUND(AVG(salaire)) FROM employes</code></li>
+				<li>Compter avec COUNT(*) : <code>SELECT COUNT(*) FROM employes WHERE sexe='f'</code></li>
+			</ul>
+			<hr>
+			<h5 class="bg-primary w-50">Requêtes imbriquées</h5>
+			<ul>
+				<li>Isoler une valeur minimum/maximum avec MIN() ou MAX() : <code>SELECT MIN(salaire) FROM employes</code></li>
+				<li>Requête imbriquée<code>SELECT prenom, salaire FROM employes WHERE salaire = (SELECT MIN(salaire) FROM employes</code>)</li>
+			</ul>
+			<h5 class="bg-primary w-50">Conditions multiples</h5>
+			<ul>
+				<li>Avec plusieurs valeurs avec le mot-clef IN : <code>SELECT nom, prenom, service FROM employes WHERE service IN('comptabilité', 'informatique')</code></li>
+				<li>Avec le mot-clef NOT IN : <code>SELECT nom, prenom, service FROM employes WHERE service NOT IN('comptabilité', 'informatique')</code>
+				<span class="small font-italic">!= permet d'exclure une seule valeur // NOT IN permet d'exclure plusieurs valeurs</span>
+				</li>
+				<li>Plusieurs conditions avec différents champs et différentes valeurs : 
+					<code>SELECT nom, prenom, service, salaire FROM employes WHERE service='commercial' AND salaire<=2000</code></li>
+				<li>Ordre de priorité sur les conditions NAD et OR : <code>SELECT nom, prenom, service, salaire FROM employes WHERE service = 'production' AND (salaire = 1900 OR salaire = 2300)</code>
+				<span class="small font-italic">Pour garantir l'ordre naturel de lecture (de la gauche vers la droite), nous utiliserons des parenthèses</span></li>
+
+				<li>Les regroupements avec GROUP BY : <code>SELECT service, COUNT(*) AS nombre FROM employes GROUP BY service</code></li>
+				<li>Regroupement avec une condition HAVING COUNT(): <code>SELECT service, COUNT(*) AS nombre FROM employes GROUP BY service HAVING COUNT(*) > 2</code></li>
+			</ul>
+		</div>
+	</div><!-- /row -->
+
+	<div class="row mt-4 mb-4">
+		<div class="col-md-12">
+			<h5>Requêtes d'insertion</h5>
+			<ul>
+				<li>INSERT : <code>INSERT INTO employes (prenom, nom, sexe, service, date_embauche, salaire) VALUES ('alexis', 'richy', 'm', 'informatique', '2011-12-28', 1800)</code></li>
+				<li>INSERT (autre méthode) : <code>INSERT INTO employes VALUES (NULL, 'samia', 'ouali', 'f', 'informatique', '2020-01-28', 2500)</code></li>
+			</ul>
+		</div>
+	</div><!-- /row -->
 
   </div> <!-- /container -->
 
 </main>
 
-<footer class="container">
-  <p>&copy; Pisola </p>
+<footer class="container bg-secondary text-white">
+  <p>&copy; pisola </p>
 </footer>
 
     <!-- Optional JavaScript -->
