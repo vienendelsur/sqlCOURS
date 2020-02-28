@@ -1,10 +1,34 @@
 1. Afficher la profession de l'employé 547.
+    SELECT service, nom, prenom FROM employes WHERE id_employes = 547;
+
 2. Afficher la date d'embauche de : Amandine.
+
+    SELECT date_embauche, prenom FROM employes WHERE prenom = 'amandine';
 3. Afficher le nombre de commerciaux.
+    SELECT COUNT(*) AS 'nombre_employes' FROM employes WHERE service = 'commercial';
+
 4. Afficher le coût des commerciaux sur 1 année.
+    SELECT SUM(salaire*12) FROM employes WHERE service = 'commercial';
+
 5. Afficher le salaire moyen par service.
+    SELECT service, AVG(salaire) FROM employes GROUP BY service;
+    SELECT service, ROUND(AVG(salaire)) FROM employes GROUP BY service;
+
 6. Afficher le nombre de recrutements sur l'année 2010.
+    SELECT COUNT(*) AS 'nbr_recrutement_2010' FROM employes WHERE date_embauche BETWEEN '2010-01-01' AND '2010-12-31'
+    SELECT COUNT(*) AS 'nbr_recrutement_2010' FROM employes WHERE date_embauche LIKE  '2010%';
+    SELECT COUNT(*) as 'nb de recrutement' FROM employes WHERE date_embauche >= '2010-01-01' AND date_embauche <= '2010-12-31';
+
+
 7. Augmenter le salaire pour chaque employé de 100€.
+    UPDATE employes SET salaire = salaire+100
+
 8. Afficher le nombre de services (différents).
+    SELECT COUNT(DISTINCT service) FROM employes;
+
 9. Afficher les informations de l'employé du service commercial gagnant le salaire le plus élevé
+    SELECT prenom, nom, service FROM employes WHERE service = 'commercial' AND salaire = (SELECT MAX(salaire) FROM employes WHERE service = 'commercial')
+
 10. Afficher l'employé ayant été embauché en dernier.
+
+    SELECT * FROM employes WHERE date_embauche = (SELECT MAX(date_embauche) FROM employes)

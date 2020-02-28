@@ -93,4 +93,55 @@ SELECT nom, prenom, service, salaire FROM employes ORDER BY salaire DESC LIMIT 0
 SELECT nom, prenom, salaire*12 FROM employes;
 
 
+/////////////////////////EXO BIBLIOTHEQUE/////////////////////////////
 
+
+CREATE DATABASE IF NOT EXISTS bibliotheque ;
+USE bibliotheque ;
+CREATE TABLE abonne (
+id_abonne INT(3) NOT NULL AUTO_INCREMENT,
+prenom VARCHAR(20) NOT NULL,
+PRIMARY KEY (id_abonne)
+) ENGINE=InnoDB ;
+
+CREATE TABLE emprunt (
+id_emprunt INT(3) NOT NULL AUTO_INCREMENT,
+id_livre INT(3) DEFAULT NULL,
+id_abonne INT(3) DEFAULT NULL,
+date_sortie DATE NOT NULL,
+date_rendu DATE DEFAULT NULL,
+PRIMARY KEY (id_emprunt)
+) ENGINE=InnoDB ;
+
+CREATE TABLE livre (
+id_livre INT(3) NOT NULL AUTO_INCREMENT,
+auteur VARCHAR(30) NOT NULL,
+titre VARCHAR(30) NOT NULL,
+PRIMARY KEY (id_livre)
+) ENGINE=InnoDB ;
+
+
+///////////////CREATION DES CLEFS ETRANGERES ////////////////////
+ALTER TABLE emprunt ADD FOREIGN KEY ( id_livre ) REFERENCES bibliotheque.livre (id_livre);
+ALTER TABLE emprunt ADD FOREIGN KEY ( id_abonne ) REFERENCES bibliotheque.abonne (id_abonne);
+
+Quels sont les titres des livres n'ayant pas été rendus à la bibliothèque ?
+1/ SELECT id_livre FROM emprunt WHERE date_rendu IS NULL
+
+2/ SELECT titre FROM livre WHERE id_livre IN (SELECT id_livre FROM emprunt WHERE date_rendu IS NULL)
+
+Nous aimerions connaitre le n° (id) de(s) livre(s) que Chloé a emprunté à la bibliothèque :
+1/ SELECT id_livre FROM emprunt WHERE id_abonne = 3
+2/ SELECT titre FROM livre WHERE id_livre IN (SELECT id_livre FROM emprunt WHERE id_abonne = 3)
+
+Afficher les prénoms des abonnés ayant emprunté un livre le 19/12/2014 : 
+
+1/ SELECT id_abonne FROM emprunt WHERE date_sortie = '2014-12-19'
+2/ SELECT prenom FROM abonne WHERE id_abonne IN (SELECT id_abonne FROM emprunt WHERE date_sortie = '2014-12-19')
+ATTENTION le mot clef IN permet de sortir (au contraire de =) plusieurs résultats
+
+Afficher la liste des abonnés ayant déjà emprunté un livre d'Alphonse DAUDET
+
+1/ SELECT id_livre FROM livre WHERE auteur = 'Alphonse Daudet'
+
+(SELECT id_livre FROM livre WHERE auteur = 'Alphonse Daudet')
